@@ -2,10 +2,7 @@ package ukr;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +21,7 @@ public class ZeroTest {
     }
 
     @BeforeClass
-    public static void setup() {
+    public static void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "C:/Drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -38,8 +35,12 @@ public class ZeroTest {
     }
 
     @AfterClass
-    public static void downAfter() {
-        System.out.println("After test suite execute this method.");
+    public static void afterClass() {
         driver.quit();
+    }
+
+    @AfterSuite
+    public static void afterSuite() {
+        System.out.println("After test suite execute this method.");
     }
 }
