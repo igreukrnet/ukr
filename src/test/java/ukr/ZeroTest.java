@@ -1,7 +1,10 @@
 package ukr;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
@@ -12,11 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class ZeroTest {
     private static WebDriver driver;
 
-    public ZeroTest() {
-    }
-
     @BeforeSuite
-    public void beforeSuite() throws Exception {
+    public static void beforeSuite() throws Exception {
         System.out.println("Before test suite execute this method.");
     }
 
@@ -26,12 +26,22 @@ public class ZeroTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
-        driver.get("https://mail.ukr.net/desktop/login");
+        driver.get("https://petrimazepa.com/");
+    }
+
+    public static WebDriver getDriver() {
+        driver = new ChromeDriver();
+        return driver;
     }
 
     @Test
-    public void userLogin() {
+    public void testNews() {
         System.out.println("Message");
+        WebElement newsButton = driver.findElement(By.id("main-views-viewviewsnews-vievspage-1"));
+        Assert.assertTrue(newsButton.isDisplayed(),"News Button isDisplayed");
+        Assert.assertEquals(newsButton.getText(),"Новости","Title is ''Новости");
+        newsButton.click();
+
     }
 
     @AfterClass
