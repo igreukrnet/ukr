@@ -1,7 +1,9 @@
 package ukr;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,19 +12,18 @@ import org.testng.annotations.Test;
  */
 public class FirstTest extends ZeroTest{
 
-    protected FirstTest init(){
-        return this;
-    }
+//    public void init(){
+//        super.init();
+//    }
 
     @Test
-    public void userLogin() {
+    public void testDigest() {
 //        ZeroTest.beforeClass();
         System.out.println("Message");
-//        WebDriver driver=ZeroTest.getDriver();
-
-        WebElement newsButton = ZeroTest.getDriver().findElement(By.id("main-views-viewviewsnews-vievspage-1"));
-        Assert.assertFalse(newsButton.isDisplayed(),"News Button isDisplayed");
-        Assert.assertEquals(newsButton.getText(),"Новости","Title is ''Новости");
+//        WebDriver driver = beforeClass();
+        WebElement newsButton = driver.findElement(By.id("main-views-viewviewsgreenlightspage-2"));
+        Assert.assertTrue(newsButton.isDisplayed(),"Digest Button isDisplayed");
+        Assert.assertEquals(newsButton.getText(),"Дайджесты","Title is 'Дайджесты'");
         newsButton.getText();
         newsButton.click();
 

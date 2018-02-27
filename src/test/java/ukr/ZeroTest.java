@@ -13,7 +13,11 @@ import java.util.concurrent.TimeUnit;
  * Created by user on 27.02.2018.
  */
 public class ZeroTest {
-    private static WebDriver driver;
+
+//    public void init() {
+//    }
+
+    public static WebDriver driver;
 
     @BeforeSuite
     public static void beforeSuite() throws Exception {
@@ -21,18 +25,19 @@ public class ZeroTest {
     }
 
     @BeforeClass
-    public static void beforeClass() {
+    public static WebDriver beforeClass() {
         System.setProperty("webdriver.chrome.driver", "C:/Drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
         driver.get("https://petrimazepa.com/");
-    }
-
-    public static WebDriver getDriver() {
-        driver = new ChromeDriver();
         return driver;
     }
+
+//    public static WebDriver getDriver() {
+//        driver = new ChromeDriver();
+//        return driver;
+//    }
 
     @Test
     public void testNews() {
@@ -53,4 +58,5 @@ public class ZeroTest {
     public static void afterSuite() {
         System.out.println("After test suite execute this method.");
     }
+
 }
