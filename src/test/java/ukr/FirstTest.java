@@ -12,15 +12,9 @@ import org.testng.annotations.Test;
  */
 public class FirstTest extends ZeroTest{
 
-//    public void init(){
-//        super.init();
-//    }
-
     @Test
     public void testDigest() {
-//        ZeroTest.beforeClass();
-        System.out.println("Message");
-//        WebDriver driver = beforeClass();
+        System.out.println("In testing");
         WebElement newsButton = driver.findElement(By.id("main-views-viewviewsgreenlightspage-2"));
         Assert.assertTrue(newsButton.isDisplayed(),"Digest Button isDisplayed");
         Assert.assertEquals(newsButton.getText(),"Дайджесты","Title is 'Дайджесты'");

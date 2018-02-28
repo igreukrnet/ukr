@@ -7,6 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,10 +18,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class ZeroTest {
 
-//    public void init() {
-//    }
+    Properties property = new Properties();
 
     public static WebDriver driver;
+    public static final String url="https://petrimazepa.com/";
 
     @BeforeSuite
     public static void beforeSuite() throws Exception {
@@ -26,22 +30,18 @@ public class ZeroTest {
 
     @BeforeClass
     public static WebDriver beforeClass() {
+        System.out.println("Before class is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", "C:/Drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
-        driver.get("https://petrimazepa.com/");
+        driver.get(url);
         return driver;
     }
 
-//    public static WebDriver getDriver() {
-//        driver = new ChromeDriver();
-//        return driver;
-//    }
-
     @Test
     public void testNews() {
-        System.out.println("Message");
+        System.out.println("In testing");
         WebElement newsButton = driver.findElement(By.id("main-views-viewviewsnews-vievspage-1"));
         Assert.assertTrue(newsButton.isDisplayed(),"News Button isDisplayed");
         Assert.assertEquals(newsButton.getText(),"Новости","Title is ''Новости");
@@ -51,6 +51,7 @@ public class ZeroTest {
 
     @AfterClass
     public static void afterClass() {
+        System.out.println("After class is close browser");
         driver.quit();
     }
 
