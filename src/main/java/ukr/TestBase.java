@@ -2,10 +2,7 @@ package ukr;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +35,6 @@ public class TestBase {
         return driver;
     }
 
-
     @AfterClass
     public static void afterClass() {
         System.out.println("After class is close browser");
@@ -50,4 +46,11 @@ public class TestBase {
         System.out.println("After test suite execute this method.");
     }
 
+    @DataProvider(name = "myProvider")
+    public static Object[][] parameters() {
+        return new Object[][]{
+                { "Дайджесты", "main-views-viewviewsgreenlightspage-2"},
+                { "Новости", "main-views-viewviewsnews-vievspage-1"}
+        };
+    }
 }
