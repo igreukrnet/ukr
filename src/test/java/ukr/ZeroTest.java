@@ -10,16 +10,16 @@ import org.testng.annotations.Test;
  * Created by user on 28.02.2018.
  */
 public class ZeroTest extends TestBase {
+
     @BeforeTest
-    public String locator(){
-        String locator="main-views-viewviewsnews-vievspage-1";
-        return locator;
+    public void beforeTest(){
+        System.out.println("Before test News");
     }
 
     @Test
     public void testNews() {
         System.out.println("In testing");
-        WebElement newsButton = driver.findElement(By.id(locator()));
+        WebElement newsButton = driver.findElement(By.id(locatorNews));
         Assert.assertTrue(newsButton.isDisplayed(),"News Button isDisplayed");
         Assert.assertEquals(newsButton.getText(),"Новости","Title is ''Новости");
         newsButton.click();

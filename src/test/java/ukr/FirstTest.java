@@ -12,15 +12,14 @@ import org.testng.annotations.Test;
 public class FirstTest extends TestBase{
 
     @BeforeTest
-    public String locator(){
-        String locator="main-views-viewviewsgreenlightspage-2";
-        return locator;
+    public void beforeTest(){
+        System.out.println("Before test Digest");
     }
 
     @Test
     public void testDigest() {
         System.out.println("In testing");
-        WebElement newsButton = driver.findElement(By.id(locator()));
+        WebElement newsButton = driver.findElement(By.id(locatorDigest));
         Assert.assertTrue(newsButton.isDisplayed(),"Digest Button isDisplayed");
         Assert.assertEquals(newsButton.getText(),"Дайджесты","Title is 'Дайджесты'");
         newsButton.getText();

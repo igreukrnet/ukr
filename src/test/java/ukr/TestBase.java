@@ -19,6 +19,8 @@ public class TestBase {
 
     public static WebDriver driver;
     public static final String url="https://petrimazepa.com/";
+    public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
+    public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
     @BeforeSuite
     public static void beforeSuite() throws Exception {
