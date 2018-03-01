@@ -3,6 +3,7 @@ package ukr;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import utils.ConfigProperties;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +16,7 @@ public class TestBase {
     Properties property = new Properties();
 
     public static WebDriver driver;
-    public static final String url="https://petrimazepa.com/";
+//    public static final String url="https://petrimazepa.com/";
     public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
     public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
@@ -31,7 +32,7 @@ public class TestBase {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
-        driver.get(url);
+        driver.get(ConfigProperties.getTestProperty("url"));
         return driver;
     }
 
