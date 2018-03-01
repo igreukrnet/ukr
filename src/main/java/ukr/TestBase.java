@@ -7,6 +7,7 @@ import utils.ConfigProperties;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Created by user on 27.02.2018.
@@ -54,4 +55,6 @@ public class TestBase {
                 { "Новости", "main-views-viewviewsnews-vievspage-1"}
         };
     }
+    public final static Logger LOGGER = Logger.getLogger(TestBase.class.getName());
+
 }

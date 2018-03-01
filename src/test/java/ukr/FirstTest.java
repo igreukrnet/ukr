@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class FirstTest extends TestBase{
 
+//    private final static Logger LOGGER = Logger.getLogger(FirstTest.class.getName());
     @BeforeTest
     public void beforeTest(){
         System.out.println("Before test Digest");
@@ -20,6 +21,7 @@ public class FirstTest extends TestBase{
 
     @Test(dataProvider = "myProvider")
     public void testDigest(String title, String locator) throws IOException {
+        LOGGER.warning("Logging an WARN-level message");
         System.out.println("In testing");
         WebElement newsButton = driver.findElement(By.id(locator));
         Assert.assertTrue(newsButton.isDisplayed(),"Digest Button isDisplayed");
