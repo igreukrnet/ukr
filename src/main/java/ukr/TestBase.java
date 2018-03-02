@@ -17,6 +17,8 @@ public class TestBase {
     Properties property = new Properties();
 
     public static WebDriver driver;
+    public static final String login="startgorun";
+    public static final String pass="789456okm";
     public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
     public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
