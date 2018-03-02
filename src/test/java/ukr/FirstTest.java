@@ -3,7 +3,6 @@ package ukr;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -12,8 +11,6 @@ import java.io.IOException;
  * Created by user on 27.02.2018.
  */
 public class FirstTest extends TestBase{
-
-//    private final static Logger LOGGER = Logger.getLogger(FirstTest.class.getName());
 
     @Test(dataProvider = "myProvider")
     public void testDigest(String title, String locator) throws IOException {
