@@ -17,7 +17,6 @@ public class TestBase {
     Properties property = new Properties();
 
     public static WebDriver driver;
-//    public static final String url="https://petrimazepa.com/";
     public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
     public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
@@ -27,9 +26,14 @@ public class TestBase {
     }
 
     @BeforeClass
-    public static WebDriver beforeClass() {
-        System.out.println("Before class is open browser and navigate to EP");
-        System.setProperty("webdriver.chrome.driver", "C:/Drivers/chromedriver.exe");
+    public void beforeClass() {
+        System.out.println("Before class execute this method.");
+    }
+
+    @BeforeTest
+    public static WebDriver beforeTest(){
+        System.out.println("Before test is open browser and navigate to EP");
+        System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
@@ -37,10 +41,15 @@ public class TestBase {
         return driver;
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @AfterTest
+    public static void afterTest() {
         System.out.println("After class is close browser");
         driver.quit();
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        System.out.println("After class execute this method.");
     }
 
     @AfterSuite

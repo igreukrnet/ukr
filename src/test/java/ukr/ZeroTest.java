@@ -11,14 +11,10 @@ import org.testng.annotations.Test;
  */
 public class ZeroTest extends TestBase {
 
-    @BeforeTest
-    public void beforeTest(){
-        System.out.println("Before test News");
-    }
-
     @Test
     public void testNews() {
-        System.out.println("In testing");
+//        System.out.println("In testing");
+        LOGGER.info("In testing");
         WebElement newsButton = driver.findElement(By.id(locatorNews));
         Assert.assertTrue(newsButton.isDisplayed(),"News Button isDisplayed");
         Assert.assertEquals(newsButton.getText(),"Новости","Title is ''Новости");
