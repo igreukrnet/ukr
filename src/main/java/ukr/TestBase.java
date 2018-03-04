@@ -17,8 +17,6 @@ public class TestBase {
     Properties property = new Properties();
 
     public static WebDriver driver;
-    public static final String login="startgorun";
-    public static final String pass="789456okm";
     public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
     public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
@@ -45,7 +43,7 @@ public class TestBase {
 
     @AfterTest
     public static void afterTest() {
-        System.out.println("After class is close browser");
+        System.out.println("After test is close browser");
         driver.quit();
     }
 
@@ -58,6 +56,15 @@ public class TestBase {
     public static void afterSuite() {
         System.out.println("After test suite execute this method.");
     }
+
+    public void sleep(long ms){
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @DataProvider(name = "myProvider")
     public static Object[][] parameters() {

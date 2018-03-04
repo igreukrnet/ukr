@@ -16,13 +16,16 @@ public class LoginPage {
     public WebDriver driver;
 
     @FindBy(name = "Login")
-    private WebElement loginField;
+    public WebElement loginField;
 
     @FindBy(name = "Password")
-    private WebElement passwordField;
+    public WebElement passwordField;
 
     @FindBy(className = "login-block__submit-but")
-    private WebElement loginButton;
+    public WebElement loginButton;
+
+    @FindBy(xpath = "//*[@href='javascript:User.logout();']")
+    public WebElement logoutButton;
 
     public void inputLogin(String login) {
         loginField.sendKeys(login);
