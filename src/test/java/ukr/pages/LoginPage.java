@@ -27,6 +27,9 @@ public class LoginPage {
     @FindBy(xpath = "//*[@href='javascript:User.logout();']")
     public WebElement logoutButton;
 
+    @FindBy(xpath = "//*[@href='https://mail.ukr.net/q/start#msglist']")
+    public WebElement mailButton;
+
     public void inputLogin(String login) {
         loginField.sendKeys(login);
     }
@@ -37,5 +40,9 @@ public class LoginPage {
 
     public void clickLoginButton() {
         loginButton.click();
+    }
+
+    public void clickMailButton() {
+        mailButton.click();
     }
 }
