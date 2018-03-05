@@ -15,8 +15,14 @@ import java.util.logging.Logger;
 public class TestBase {
 
     Properties property = new Properties();
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public static WebDriver driver;
+    public static WebDriver getDriver(){
+        if(driver.get() == null){
+            driver.set(new ChromeDriver());
+        }
+            return driver.get();
+    }
     public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
     public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
@@ -30,21 +36,22 @@ public class TestBase {
         System.out.println("Before class execute this method.");
     }
 
-    @BeforeTest
+    @BeforeMethod
     public static WebDriver beforeTest(){
-        System.out.println("Before test is open browser and navigate to EP");
+        System.out.println("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
-        driver.get(ConfigProperties.getTestProperty("url"));
-        return driver;
+        getDriver();
+        driver.get().manage().window().maximize();
+        driver.get().manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
+        driver.get().get(ConfigProperties.getTestProperty("url"));
+        return driver.get();
     }
 
-    @AfterTest
+    @AfterMethod
     public static void afterTest() {
-        System.out.println("After test is close browser");
-        driver.quit();
+        System.out.println("After Method is close browser");
+        driver.get().quit();
+        driver.set(null);
     }
 
     @AfterClass

@@ -19,7 +19,7 @@ public class LoginTest extends TestBase{
 
     @Test
     public void loginTest(){
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
@@ -29,16 +29,16 @@ public class LoginTest extends TestBase{
 
     @Test
     public void mailTest(){
-        LoginPage loginPage = new LoginPage(driver);
-        MailPage mailPage= new MailPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        MailPage mailPage= new MailPage(getDriver());
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
         sleep(1000);
         loginPage.clickMailButton();
         sleep(1000);
-        ArrayList<String> tabsNew = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabsNew.get(1));
+        ArrayList<String> tabsNew = new ArrayList<String>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabsNew.get(1));
         mailPage.clickNewMailButton();
         sleep(3000);
 
