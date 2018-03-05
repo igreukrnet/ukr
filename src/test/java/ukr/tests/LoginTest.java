@@ -37,8 +37,8 @@ public class LoginTest extends TestBase{
         sleep(1000);
         loginPage.clickMailButton();
         sleep(1000);
-        ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs2.get(1));
+        ArrayList<String> tabsNew = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabsNew.get(1));
         mailPage.clickNewMailButton();
         sleep(3000);
 

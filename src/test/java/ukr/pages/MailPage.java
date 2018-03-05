@@ -12,7 +12,7 @@ public class MailPage {
     }
     public WebDriver driver;
 
-    @FindBy(className = "default compose")
+    @FindBy(xpath = "//*[@class='default compose']")
     public WebElement newMailButton;
 
 //    @FindBy(xpath = "//*[@href='https://mail.ukr.net/q/start#msglist']")
