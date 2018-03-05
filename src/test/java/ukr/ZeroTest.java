@@ -20,8 +20,6 @@ public class ZeroTest extends TestBase {
         WebElement passField = getDriver().findElement(By.name(passLocator));
         WebElement loginBut = getDriver().findElement(By.className(loginButLocator));
         Assert.assertTrue(loginField.isDisplayed(),"Login field  is displayed");
-//        loginField.sendKeys(login);
-//        passField.sendKeys(pass);
         loginBut.click();
         loginBut.click();
 

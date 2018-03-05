@@ -1,7 +1,7 @@
 <suite name="TestSuite">
     <test name="AutoQA">
         <classes>
-            <class name="ukr.tests.LoginTest" />
+            <class name="ukr.tests.SomeTest" />
             <!--<methods>-->
                 <!--<include name="loginTest"/>-->
                 <!--<include name="mailTest"/>-->

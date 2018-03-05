@@ -11,7 +11,7 @@ import static utils.ConfigProperties.*;
 /**
  * Created by user on 02.03.2018.
  */
-public class LoginTest extends TestBase{
+public class SomeTest extends TestBase{
     String login= getTestProperty("login");
     String pass= getTestProperty("pass");
 
