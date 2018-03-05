@@ -15,15 +15,15 @@ public class MailPage {
     @FindBy(xpath = "//*[@class='default compose']")
     public WebElement newMailButton;
 
-//    @FindBy(xpath = "//*[@href='https://mail.ukr.net/q/start#msglist']")
-//    public WebElement mailButton;
-
-//    public void inputLogin(String login) {
-//        loginField.sendKeys(login);
-//    }
+    @FindBy(xpath = "//*[@class='default send']")
+    public WebElement sendMailButton;
 
     public void clickNewMailButton() {
         newMailButton.click();
+    }
+
+    public void clickSendMailButton() {
+        sendMailButton.click();
     }
 
 }

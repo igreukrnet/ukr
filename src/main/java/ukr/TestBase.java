@@ -23,8 +23,6 @@ public class TestBase {
         }
             return driver.get();
     }
-    public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
-    public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
     @BeforeSuite
     public static void beforeSuite() throws Exception {
@@ -72,7 +70,6 @@ public class TestBase {
         }
     }
 
-
     @DataProvider(name = "myProvider")
     public static Object[][] parameters() {
         return new Object[][]{
@@ -80,6 +77,6 @@ public class TestBase {
                 { "Новости", "main-views-viewviewsnews-vievspage-1"}
         };
     }
-    public final static Logger LOGGER = Logger.getLogger(TestBase.class.getName());
 
+    public final static Logger LOGGER = Logger.getLogger(TestBase.class.getName());
 }
