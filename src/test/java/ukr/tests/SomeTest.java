@@ -25,7 +25,7 @@ public class SomeTest extends TestBase{
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
-        sleep(1000);
+        waitForElement(loginPage.logoutButton);
         Assert.assertTrue(loginPage.logoutButton.isDisplayed(),"Logout button is displayed");
     }
 
@@ -38,11 +38,9 @@ public class SomeTest extends TestBase{
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
-        sleep(1000);
 
         LOGGER.info("Go to mailbox");
         loginPage.clickMailButton();
-        sleep(1000);
         List<String> tabsNew = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabsNew.get(1));
 

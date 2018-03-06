@@ -1,6 +1,7 @@
 package ukr;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import utils.ConfigProperties;
@@ -59,7 +60,20 @@ public class TestBase {
         }
     }
 
-    @DataProvider(name = "myProvider")
+    public void waitForElement(WebElement element) {
+        int maxAttempt = 5;
+        int count = 1;
+        while (count < maxAttempt && !element.isDisplayed()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            count++;
+        }
+    }
+
+        @DataProvider(name = "myProvider")
     public static Object[][] parameters() {
         return new Object[][]{
                 { "Дайджесты", "main-views-viewviewsgreenlightspage-2"},
