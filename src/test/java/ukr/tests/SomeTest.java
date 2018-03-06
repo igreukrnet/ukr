@@ -5,8 +5,11 @@ import org.testng.annotations.Test;
 import ukr.TestBase;
 import ukr.pages.LoginPage;
 import ukr.pages.MailPage;
+
 import java.util.ArrayList;
-import static utils.ConfigProperties.*;
+import java.util.List;
+
+import static utils.ConfigProperties.getTestProperty;
 
 /**
  * Created by user on 02.03.2018.
@@ -18,7 +21,7 @@ public class SomeTest extends TestBase{
     @Test
     public void loginTest(){
         LOGGER.info("Login");
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
@@ -28,8 +31,8 @@ public class SomeTest extends TestBase{
 
     @Test
     public void mailTest(){
-        LoginPage loginPage = new LoginPage(getDriver());
-        MailPage mailPage= new MailPage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        MailPage mailPage= new MailPage(driver);
 
         LOGGER.info("Login");
         loginPage.inputLogin(login);
@@ -40,8 +43,8 @@ public class SomeTest extends TestBase{
         LOGGER.info("Go to mailbox");
         loginPage.clickMailButton();
         sleep(1000);
-        ArrayList<String> tabsNew = new ArrayList<String>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabsNew.get(1));
+        List<String> tabsNew = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabsNew.get(1));
 
         LOGGER.info("Try to create new mail");
         mailPage.clickNewMailButton();

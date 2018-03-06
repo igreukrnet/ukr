@@ -16,9 +16,9 @@ public class ZeroTest extends TestBase {
     @Test
     public void testNews() {
         LOGGER.info("In testing");
-        WebElement loginField = getDriver().findElement(By.name(loginLocator));
-        WebElement passField = getDriver().findElement(By.name(passLocator));
-        WebElement loginBut = getDriver().findElement(By.className(loginButLocator));
+        WebElement loginField = driver.findElement(By.name(loginLocator));
+        WebElement passField = driver.findElement(By.name(passLocator));
+        WebElement loginBut = driver.findElement(By.className(loginButLocator));
         Assert.assertTrue(loginField.isDisplayed(),"Login field  is displayed");
         loginBut.click();
         loginBut.click();

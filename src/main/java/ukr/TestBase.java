@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import utils.ConfigProperties;
 
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -14,18 +13,10 @@ import java.util.logging.Logger;
  */
 public class TestBase {
 
-    Properties property = new Properties();
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-
-    public static WebDriver getDriver(){
-        if(driver.get() == null){
-            driver.set(new ChromeDriver());
-        }
-            return driver.get();
-    }
+    public static WebDriver driver;
 
     @BeforeSuite
-    public static void beforeSuite() throws Exception {
+    public  void beforeSuite() throws Exception {
         System.out.println("Before test suite execute this method.");
     }
 
@@ -35,30 +26,28 @@ public class TestBase {
     }
 
     @BeforeMethod
-    public static WebDriver beforeTest(){
+    public  WebDriver beforeMethod(){
         System.out.println("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
-        getDriver();
-        driver.get().manage().window().maximize();
-        driver.get().manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
-        driver.get().get(ConfigProperties.getTestProperty("url"));
-        return driver.get();
-    }
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get(ConfigProperties.getTestProperty("url"));
+        return driver;    }
 
     @AfterMethod
-    public static void afterTest() {
+    public void afterMethod() {
         System.out.println("After Method is close browser");
-        driver.get().quit();
-        driver.set(null);
+        driver.quit();
     }
 
     @AfterClass
-    public static void afterClass() {
+    public  void afterClass() {
         System.out.println("After class execute this method.");
     }
 
     @AfterSuite
-    public static void afterSuite() {
+    public  void afterSuite() {
         System.out.println("After test suite execute this method.");
     }
 
