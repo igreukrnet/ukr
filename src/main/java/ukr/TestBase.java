@@ -18,17 +18,17 @@ public class TestBase {
 
     @BeforeSuite
     public  void beforeSuite() throws Exception {
-        System.out.println("Before test suite execute this method.");
+        LOGGER.info("Before test suite execute this method.");
     }
 
     @BeforeClass
     public void beforeClass() {
-        System.out.println("Before class execute this method.");
+        LOGGER.info("Before class execute this method.");
     }
 
     @BeforeMethod
     public  WebDriver beforeMethod(){
-        System.out.println("Before Method is open browser and navigate to EP");
+        LOGGER.info("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -38,18 +38,18 @@ public class TestBase {
 
     @AfterMethod
     public void afterMethod() {
-        System.out.println("After Method is close browser");
+        LOGGER.info("After Method is close browser");
         driver.quit();
     }
 
     @AfterClass
     public  void afterClass() {
-        System.out.println("After class execute this method.");
+        LOGGER.info("After class execute this method.");
     }
 
     @AfterSuite
     public  void afterSuite() {
-        System.out.println("After test suite execute this method.");
+        LOGGER.info("After test suite execute this method.");
     }
 
     public void sleep(long ms){

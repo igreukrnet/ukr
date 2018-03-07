@@ -14,8 +14,7 @@ public class FirstTest extends TestBase{
 
     @Test(dataProvider = "myProvider")
     public void testDigest(String title, String locator) throws IOException {
-        LOGGER.fine("Logging an WARN-level message");
-        System.out.println("In testing");
+        LOGGER.info("In testing");
         WebElement newsButton = driver.findElement(By.id(locator));
         Assert.assertTrue(newsButton.isDisplayed(),"Digest Button isDisplayed");
         Assert.assertEquals(newsButton.getText(),title,"Title is "+title);
