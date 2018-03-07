@@ -63,14 +63,14 @@ public class TestBase {
     public void waitForElement(WebElement element) {
         int maxAttempt = 5;
         int count = 1;
-        while (count < maxAttempt && !element.isDisplayed()) {
+        do {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(600);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             count++;
-        }
+        } while (count < maxAttempt && !element.isDisplayed());
     }
 
         @DataProvider(name = "myProvider")

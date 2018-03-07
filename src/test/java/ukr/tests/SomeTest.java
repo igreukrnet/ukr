@@ -5,10 +5,8 @@ import org.testng.annotations.Test;
 import ukr.TestBase;
 import ukr.pages.LoginPage;
 import ukr.pages.MailPage;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static utils.ConfigProperties.getTestProperty;
 
 /**
