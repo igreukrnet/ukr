@@ -5,8 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import utils.ConfigProperties;
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -18,17 +20,17 @@ public class TestBase {
 
     @BeforeSuite
     public  void beforeSuite() throws Exception {
-        LOGGER.info("Before test suite execute this method.");
+        log.info("Before test suite execute this method.");
     }
 
     @BeforeClass
     public void beforeClass() {
-        LOGGER.info("Before class execute this method.");
+        log.info("Before class execute this method.");
     }
 
     @BeforeMethod
     public  WebDriver beforeMethod(){
-        LOGGER.info("Before Method is open browser and navigate to EP");
+        log.info("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -38,26 +40,18 @@ public class TestBase {
 
     @AfterMethod
     public void afterMethod() {
-        LOGGER.info("After Method is close browser");
+        log.info("After Method is close browser");
         driver.quit();
     }
 
     @AfterClass
     public  void afterClass() {
-        LOGGER.info("After class execute this method.");
+        log.info("After class execute this method.");
     }
 
     @AfterSuite
     public  void afterSuite() {
-        LOGGER.info("After test suite execute this method.");
-    }
-
-    public void sleep(long ms){
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        log.info("After test suite execute this method.");
     }
 
     public void waitForElement(WebElement element) {
@@ -73,13 +67,14 @@ public class TestBase {
         } while (count < maxAttempt && !element.isDisplayed());
     }
 
-        @DataProvider(name = "myProvider")
-    public static Object[][] parameters() {
-        return new Object[][]{
-                { "Дайджесты", "main-views-viewviewsgreenlightspage-2"},
-                { "Новости", "main-views-viewviewsnews-vievspage-1"}
-        };
+    public static Logger log;
+    static {
+        InputStream stream = TestBase.class.getClassLoader().getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(stream);
+            log= Logger.getLogger(TestBase.class.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-    public final static Logger LOGGER = Logger.getLogger(TestBase.class.getName());
 }

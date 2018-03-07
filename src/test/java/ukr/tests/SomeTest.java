@@ -18,8 +18,10 @@ public class SomeTest extends TestBase{
 
     @Test
     public void loginTest(){
-        LOGGER.info("Login");
+        log.info("loginTest starts:");
         LoginPage loginPage = new LoginPage(driver);
+
+        log.info("Login");
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
@@ -29,20 +31,21 @@ public class SomeTest extends TestBase{
 
     @Test
     public void mailTest(){
+        log.info("mailTest starts:");
         LoginPage loginPage = new LoginPage(driver);
         MailPage mailPage= new MailPage(driver);
 
-        LOGGER.info("Login");
+        log.info("Login");
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
 
-        LOGGER.info("Go to mailbox");
+        log.info("Go to mailbox");
         loginPage.clickMailButton();
         List<String> tabsNew = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabsNew.get(1));
 
-        LOGGER.info("Try to create new mail");
+        log.info("Try to create new mail");
         mailPage.clickNewMailButton();
         Assert.assertTrue(mailPage.sendMailButton.isDisplayed(),"Send Mail Button is displayed");
 
