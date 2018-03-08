@@ -19,7 +19,7 @@ public class SomeTest extends TestBase{
     @Test
     public void loginTest(){
         log.info("loginTest starts:");
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
 
         log.info("Login");
         loginPage.inputLogin(login);
@@ -32,8 +32,8 @@ public class SomeTest extends TestBase{
     @Test
     public void mailTest(){
         log.info("mailTest starts:");
-        LoginPage loginPage = new LoginPage(driver);
-        MailPage mailPage= new MailPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        MailPage mailPage= new MailPage(getDriver());
 
         log.info("Login");
         loginPage.inputLogin(login);
@@ -42,8 +42,8 @@ public class SomeTest extends TestBase{
 
         log.info("Go to mailbox");
         loginPage.clickMailButton();
-        List<String> tabsNew = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabsNew.get(1));
+        List<String> tabsNew = new ArrayList<>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabsNew.get(1));
 
         log.info("Try to create new mail");
         mailPage.clickNewMailButton();

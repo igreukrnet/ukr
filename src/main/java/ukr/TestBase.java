@@ -16,7 +16,26 @@ import java.util.logging.Logger;
  */
 public class TestBase {
 
-    public static WebDriver driver;
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    public WebDriver getDriver(){
+        if(driver.get() == null){
+            driver.set(new ChromeDriver());
+        }
+        return driver.get();
+    }
+
+    public static Logger log;
+    static {
+        InputStream stream = TestBase.class.getClassLoader().getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(stream);
+            log= Logger.getLogger(TestBase.class.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @BeforeSuite
     public  void beforeSuite() throws Exception {
@@ -32,16 +51,16 @@ public class TestBase {
     public  WebDriver beforeMethod(){
         log.info("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(ConfigProperties.getTestProperty("url"));
-        return driver;    }
+        driver = new ThreadLocal<>();
+        getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        getDriver().get(ConfigProperties.getTestProperty("url"));
+        return getDriver();    }
 
     @AfterMethod
     public void afterMethod() {
         log.info("After Method is close browser");
-        driver.quit();
+        getDriver().quit();
     }
 
     @AfterClass
@@ -59,7 +78,7 @@ public class TestBase {
         int count = 1;
         do {
             try {
-                Thread.sleep(600);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -67,14 +86,4 @@ public class TestBase {
         } while (count < maxAttempt && !element.isDisplayed());
     }
 
-    public static Logger log;
-    static {
-        InputStream stream = TestBase.class.getClassLoader().getResourceAsStream("logging.properties");
-        try {
-            LogManager.getLogManager().readConfiguration(stream);
-            log= Logger.getLogger(TestBase.class.getName());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -9,7 +9,7 @@ import ukr.TestBase;
 /**
  * Created by user on 02.03.2018.
  */
-public class LoginPage extends TestBase{
+public class LoginPage {
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -44,7 +44,11 @@ public class LoginPage extends TestBase{
     }
 
     public void clickMailButton() {
-        waitForElement(mailButton);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         mailButton.click();
     }
 }
