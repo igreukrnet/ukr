@@ -50,7 +50,7 @@ public class TestBase {
     @BeforeMethod
     public  WebDriver beforeMethod(){
         log.info("Before Method is open browser and navigate to EP");
-        System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ThreadLocal<>();
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
