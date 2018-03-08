@@ -1,12 +1,14 @@
 package ukr;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import utils.ConfigProperties;
-
-import java.util.Properties;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -14,56 +16,65 @@ import java.util.logging.Logger;
  */
 public class TestBase {
 
-    Properties property = new Properties();
-
     public static WebDriver driver;
-    public static final String locatorNews="main-views-viewviewsnews-vievspage-1";
-    public static final String locatorDigest="main-views-viewviewsgreenlightspage-2";
 
     @BeforeSuite
-    public static void beforeSuite() throws Exception {
-        System.out.println("Before test suite execute this method.");
+    public  void beforeSuite() throws Exception {
+        log.info("Before test suite execute this method.");
     }
 
     @BeforeClass
     public void beforeClass() {
-        System.out.println("Before class execute this method.");
+        log.info("Before class execute this method.");
     }
 
-    @BeforeTest
-    public static WebDriver beforeTest(){
-        System.out.println("Before test is open browser and navigate to EP");
+    @BeforeMethod
+    public  WebDriver beforeMethod(){
+        log.info("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(ConfigProperties.getTestProperty("url"));
-        return driver;
-    }
+        return driver;    }
 
-    @AfterTest
-    public static void afterTest() {
-        System.out.println("After class is close browser");
+    @AfterMethod
+    public void afterMethod() {
+        log.info("After Method is close browser");
         driver.quit();
     }
 
     @AfterClass
-    public static void afterClass() {
-        System.out.println("After class execute this method.");
+    public  void afterClass() {
+        log.info("After class execute this method.");
     }
 
     @AfterSuite
-    public static void afterSuite() {
-        System.out.println("After test suite execute this method.");
+    public  void afterSuite() {
+        log.info("After test suite execute this method.");
     }
 
-    @DataProvider(name = "myProvider")
-    public static Object[][] parameters() {
-        return new Object[][]{
-                { "Дайджесты", "main-views-viewviewsgreenlightspage-2"},
-                { "Новости", "main-views-viewviewsnews-vievspage-1"}
-        };
+    public void waitForElement(WebElement element) {
+        int maxAttempt = 5;
+        int count = 1;
+        do {
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            count++;
+        } while (count < maxAttempt && !element.isDisplayed());
     }
-    public final static Logger LOGGER = Logger.getLogger(TestBase.class.getName());
 
+    public static Logger log;
+    static {
+        InputStream stream = TestBase.class.getClassLoader().getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(stream);
+            log= Logger.getLogger(TestBase.class.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
