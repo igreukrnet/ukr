@@ -42,8 +42,15 @@ public class SomeTest extends TestBase{
 
         log.info("Go to mailbox");
         loginPage.clickMailButton();
-        List<String> tabsNew = new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabsNew.get(1));
+        ArrayList<String> tabsNew = new ArrayList<>(getDriver().getWindowHandles());
+        int index=0;
+        for (int count=0;count<tabsNew.size() ; count++){
+            getDriver().switchTo().window(tabsNew.get(count));
+            if (getDriver().getTitle().contains(getTestProperty("mailTabTitle"))) {
+                index=count;
+            }
+        }
+        getDriver().switchTo().window(tabsNew.get(index));
 
         log.info("Try to create new mail");
         mailPage.clickNewMailButton();

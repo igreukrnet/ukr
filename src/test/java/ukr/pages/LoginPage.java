@@ -45,7 +45,7 @@ public class LoginPage {
 
     public void clickMailButton() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
