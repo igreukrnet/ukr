@@ -27,6 +27,10 @@ public class ConfigProperties {
     }
 
     public static String getTestProperty(String key) {
-        return PROPERTIES.getProperty(key);
+        String result=PROPERTIES.getProperty(key);
+        if (result==null){
+            result="Property Is Absent!";
+        }
+        return result;
     }
 }
