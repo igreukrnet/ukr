@@ -1,4 +1,4 @@
-<suite name="TestSuite">
+<suite name="TestSuite" parallel="methods">
     <test name="AutoQA">
         <classes>
             <class name="ukr.tests.SomeTest" />

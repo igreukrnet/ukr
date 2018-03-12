@@ -5,8 +5,9 @@ import org.testng.annotations.Test;
 import ukr.TestBase;
 import ukr.pages.LoginPage;
 import ukr.pages.MailPage;
+
 import java.util.ArrayList;
-import java.util.List;
+
 import static utils.ConfigProperties.getTestProperty;
 
 /**
@@ -25,7 +26,7 @@ public class SomeTest extends TestBase{
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
-        waitForElement(loginPage.logoutButton);
+        sleep(1000);
         Assert.assertTrue(loginPage.logoutButton.isDisplayed(),"Logout button is displayed");
     }
 
