@@ -26,4 +26,5 @@ public class MailPage {
         sendMailButton.click();
     }
 
+
 }
