@@ -56,7 +56,5 @@ public class SomeTest extends TestBase{
         log.info("Try to create new mail");
         mailPage.clickNewMailButton();
         Assert.assertTrue(mailPage.sendMailButton.isDisplayed(),"Send Mail Button is displayed");
-
-
     }
 }
