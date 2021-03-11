@@ -16,7 +16,7 @@ public class MailPage {
     public WebElement newMailButton;
 
     @FindBy(xpath = "//*[@class='default send']")
-    public WebElement sendMailButton;
+    public WebElement sendMailButton ;
 
     public void clickNewMailButton() {
         newMailButton.click();
