@@ -12,9 +12,10 @@ import static utils.ConfigProperties.getTestProperty;
 /**
  * Created by user on 02.03.2018.
  */
+
 public class SomeTest extends TestBase{
-    String login= getTestProperty("login");
-    String pass= getTestProperty("pass");
+    String login = getTestProperty("login");
+    String pass = getTestProperty("pass"); 
 
     @Test
     public void loginTest(){
