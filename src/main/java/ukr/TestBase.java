@@ -32,11 +32,63 @@ public class TestBase {
     public  WebDriver beforeMethod(){
         log.info("Before Method is open browser and navigate to EP");
         System.setProperty("webdriver.chrome.driver", ConfigProperties.getTestProperty("chromedriver"));
-        driver = new ChromeDriver();
+        
+        // Stealth настройки ChromeOptions
+        org.openqa.selenium.chrome.ChromeOptions options = new org.openqa.selenium.chrome.ChromeOptions();
+        
+        // Отключаем флаги автоматизации
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        options.setExperimentalOption("useAutomationExtension", false);
+        
+        // Добавляем аргументы для обхода детекции
+        options.addArguments("--disable-blink-features=AutomationControlled");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        
+        // Устанавливаем user-agent как у обычного браузера
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36");
+        
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        
+        // Сначала открываем пустую страницу и применяем stealth
+        driver.get("about:blank");
+        applyStealth(driver);
+        
+        // Теперь переходим на целевую страницу
         driver.get(ConfigProperties.getTestProperty("url"));
-        return driver;    }
+        
+        return driver;
+    }
+    
+    private void applyStealth(WebDriver driver) {
+        try {
+            // Скрываем webdriver флаг
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            );
+            
+            // Переопределяем navigator.plugins
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
+                "Object.defineProperty(navigator, 'plugins', {get: () => [1, 2, 3, 4, 5]})"
+            );
+            
+            // Переопределяем navigator.languages
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
+                "Object.defineProperty(navigator, 'languages', {get: () => ['uk-UA', 'uk', 'en-US', 'en']})"
+            );
+            
+            // Добавляем chrome объект
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
+                "window.chrome = {runtime: {}};"
+            );
+            
+            log.info("Stealth scripts applied successfully");
+        } catch (Exception e) {
+            log.info("Error applying stealth scripts: " + e.getMessage());
+        }
+    }
 
     @AfterMethod
     public void afterMethod() {
