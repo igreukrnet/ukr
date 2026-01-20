@@ -16,7 +16,7 @@ public class LoginPage extends TestBase{
     }
     public WebDriver driver;
 
-    @FindBy(name = "Login")
+    @FindBy(name = "login")
     public WebElement loginField;
 
     @FindBy(name = "Password")
